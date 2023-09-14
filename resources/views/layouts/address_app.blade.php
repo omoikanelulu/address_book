@@ -15,7 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
+        <div class="m-5 font-sans text-gray-900 antialiased">
             @yield('content')
         </div>
     </body>
