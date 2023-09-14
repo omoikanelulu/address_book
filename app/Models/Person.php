@@ -9,7 +9,7 @@ class Person extends Model
 {
     use HasFactory;
 
-    protected $fillable [
+    protected $fillable = [
         'first_name',
         'last_name',
         'email_address',
