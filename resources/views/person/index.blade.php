@@ -7,7 +7,7 @@
 
     {{-- 操作の結果を表示する --}}
     @if (session('message'))
-        <div class="bg-green-400 p-5 mt-5 rounted">
+        <div class="bg-green-400 p-5 mt-5 rounded">
             <p>{{ session('message') }}</p>
         </div>
     @endif
