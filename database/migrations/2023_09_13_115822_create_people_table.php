@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('first_name')->comment('名');
             $table->string('last_name')->comment('性');
             $table->string('email_address')->unique()->comment('メールアドレス');
-            $table->tinyInteger('phone_number')->unique()->comment('電話番号');
+            $table->string('phone_number')->unique()->comment('電話番号');
             $table->date('birth_date')->comment('生年月日');
             $table->timestamps();
         });
