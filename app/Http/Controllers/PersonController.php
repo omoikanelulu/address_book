@@ -15,7 +15,8 @@ class PersonController extends Controller
      */
     public function index()
     {
-        //
+        $peoples = Person::all();
+        return view('person.index', compact('peoples'));
     }
 
     /**
@@ -25,7 +26,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-        //
+        return view('person.create');
     }
 
     /**
@@ -36,7 +37,8 @@ class PersonController extends Controller
      */
     public function store(StorePersonRequest $request)
     {
-        //
+        Person::create($request->all());
+        return redirect()->route('person.index')->with('message', '登録しました');
     }
 
     /**
@@ -45,9 +47,10 @@ class PersonController extends Controller
      * @param  \App\Models\Person  $person
      * @return \Illuminate\Http\Response
      */
-    public function show(Person $person)
+    public function show($id)
     {
-        //
+        $person = Person::findOrFail($id);
+        return view('person.show', compact('person'));
     }
 
     /**
@@ -56,9 +59,10 @@ class PersonController extends Controller
      * @param  \App\Models\Person  $person
      * @return \Illuminate\Http\Response
      */
-    public function edit(Person $person)
+    public function edit($id)
     {
-        //
+        $person = Person::findOrFail($id);
+        return view('person.edit', compact('person'));
     }
 
     /**
@@ -68,9 +72,11 @@ class PersonController extends Controller
      * @param  \App\Models\Person  $person
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePersonRequest $request, Person $person)
+    public function update(UpdatePersonRequest $request, $id)
     {
-        //
+        $person = Person::findOrFail($id);
+        $person->update($request->all());
+        return redirect()->route('person.index')->with('message', '更新しました');
     }
 
     /**
@@ -79,8 +85,10 @@ class PersonController extends Controller
      * @param  \App\Models\Person  $person
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Person $person)
+    public function destroy($id)
     {
-        //
+        $person = Person::findOrFail($id);
+        $person->delete();
+        return redirect()->route('person.index')->with('message', '削除しました');
     }
 }
