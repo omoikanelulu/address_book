@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// リソースコントローラの記述
+Route::resource('address', AddressController::class);
+Route::resource('person', PersonController::class);
 
 Route::middleware([
     'auth:sanctum',
