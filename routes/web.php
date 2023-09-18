@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// ログイン済みであるユーザがアクセス可能
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
