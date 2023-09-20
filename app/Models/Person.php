@@ -16,4 +16,9 @@ class Person extends Model
         'phone_number',
         'birth_date',
     ];
+
+    public function address()
+    {
+        return $this->hasMany(Address::class);
+    }
 }

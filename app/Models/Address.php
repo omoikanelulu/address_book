@@ -12,10 +12,15 @@ class Address extends Model
     protected $fillable = [
         'person_id',
         'country',
-        'type'
+        'type',
         'postal_code',
         'state',
         'city',
         'street_address',
     ];
+
+    public function person()
+    {
+        return $this->belongsTo(Person::class);
+    }
 }
