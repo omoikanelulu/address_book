@@ -19,6 +19,7 @@ class Address extends Model
         'street_address',
     ];
 
+    // このモデルはPersonモデルを主としている
     public function person()
     {
         return $this->belongsTo(Person::class);

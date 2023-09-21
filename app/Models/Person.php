@@ -17,6 +17,7 @@ class Person extends Model
         'birth_date',
     ];
 
+    // このモデルはAddressモデルを複数従えている
     public function address()
     {
         return $this->hasMany(Address::class);
