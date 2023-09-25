@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePersonRequest;
 use App\Http\Requests\UpdatePersonRequest;
+use App\Models\Address;
 use App\Models\Person;
+use Illuminate\Support\Facades\DB;
 
 class PersonController extends Controller
 {
@@ -37,7 +39,26 @@ class PersonController extends Controller
      */
     public function store(StorePersonRequest $request)
     {
-        Person::create($request->all());
+        try {
+            // トランザクション処理開始
+            DB::beginTransaction();
+
+            // $personDataに、リクエストの中から必要なデータを集める
+            $personData = $request->only('first_name', 'last_name', 'email_address', 'phone_number', 'birth_date');
+            // レコードの挿入処理
+            Person::create($personData);
+
+            $addressData = $request->only('country', 'type', 'postal_code', 'state', 'city', 'street_address');
+            $addressData['person_id'] = auth()->id();
+            Address::create($addressData);
+
+            // トランザクションをコミット
+            DB::commit();
+        } catch (\Exception $e) {
+            // トランザクションをロールバック
+            DB::rollBack();
+            return redirect()->route('person.error')->with('message', '登録に失敗しました');
+        }
         return redirect()->route('person.index')->with('message', '登録しました');
     }
 
@@ -62,7 +83,7 @@ class PersonController extends Controller
     public function edit($id)
     {
         $person = Person::findOrFail($id);
-        return view('person.edit', compact('person'));
+        return view('person.show', compact('person'));
     }
 
     /**
