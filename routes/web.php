@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('start');
+    // return view('welcome');
 });
 
 // ログイン済みであるユーザがアクセス可能
