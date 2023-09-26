@@ -26,7 +26,7 @@
         </thead>
         <tbody>
             @foreach ($peoples as $person)
-                <tr>
+                <tr class="hover:bg-green-200">
                     {{-- 取得したデータの表示 --}}
                     <td>{{ $person->id }}</td>
                     <td>{{ $person->last_name }}</td>
@@ -37,16 +37,8 @@
 
                     {{-- 操作ボタン群 --}}
                     <td>
-                        <a class="inline-block p-2 bg-blue-100 hover:bg-blue-200 rounded"
+                        <a class="inline-block p-2 bg-blue-100 hover:bg-blue-300 rounded"
                             href="{{ route('person.show', $person->id) }}">詳細</a>
-                        <a class="inline-block p-2 bg-yellow-100 hover:bg-yellow-200 rounded"
-                            href="{{ route('person.edit', $person->id) }}">編集</a>
-                        <form class="inline-block p-2 bg-red-100 hover:bg-red-200 rounded"
-                            action="{{ route('person.destroy', $person->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" value="削除">
-                        </form>
                     </td>
                 </tr>
             @endforeach
