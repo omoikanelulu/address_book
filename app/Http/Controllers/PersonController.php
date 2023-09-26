@@ -83,7 +83,7 @@ class PersonController extends Controller
     public function edit($id)
     {
         $person = Person::findOrFail($id);
-        return view('person.show', compact('person'));
+        return view('person.edit', compact('person'));
     }
 
     /**
