@@ -391,11 +391,17 @@
 <body>
     <div
         class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-        <a class="" href="{{ route('login') }}">
-            <div class="text-5xl p-10 text-gray-400 hover:text-gray-500 block rounded-full bg-green-200 hover:bg-green-300 shadow">
-                ログイン
+        <div x-data="{ open: false }">
+            <a href="{{ route('person.index') }}">
+                <div class="text-5xl p-10 text-gray-400 hover:text-gray-500 block rounded-full bg-green-200 hover:bg-green-300 shadow"
+                    @mouseover="open = true" @mouseout="open = false">
+                    ログイン
+                </div>
+            </a>
+            <div class="text-center" x-show="open">
+                ようこそ！
             </div>
-        </a>
+        </div>
     </div>
 </body>
 
